@@ -80,5 +80,15 @@ class HashMap {
       }
     }
   }
+  length() {
+    let count = 0;
+    this.#buckets.forEach((bucket) => {
+      if (bucket !== null) {
+        const keys = bucket.size();
+        count += keys;
+      }
+    });
+    return count;
+  }
 }
 export { HashMap };
