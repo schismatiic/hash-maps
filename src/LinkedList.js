@@ -91,6 +91,27 @@ class LinkedList {
       return false;
     }
   }
+  removeHash(key) {
+    if (this.head === null) {
+      return undefined;
+    } else {
+      let tmp = this.head;
+      if (key === tmp.value[0]) {
+        console.log("miau");
+
+        tmp.nextNode = tmp.nextNode.nextNode;
+        return true;
+      }
+      while (tmp.nextNode !== null) {
+        tmp = tmp.nextNode;
+        if (tmp.value[0] === key) {
+          tmp.nextNode = tmp.nextNode.nextNode;
+          return true;
+        }
+      }
+      return false;
+    }
+  }
   findIndex(value) {
     if (this.head === null) {
       return undefined;
@@ -104,6 +125,25 @@ class LinkedList {
         tmp = tmp.nextNode;
         count++;
         if (tmp.value === value) {
+          return count;
+        }
+      }
+      return -1;
+    }
+  }
+  findIndexHash(key) {
+    if (this.head === null) {
+      return undefined;
+    } else {
+      let count = 0;
+      let tmp = this.head;
+      if (key === tmp.value[0]) {
+        return 0;
+      }
+      while (tmp.nextNode !== null) {
+        tmp = tmp.nextNode;
+        count++;
+        if (tmp.value[0] === key) {
           return count;
         }
       }
@@ -151,16 +191,20 @@ class LinkedList {
   }
   toString() {
     let stringToPrint = "";
-    let tmp = this.head;
-    stringToPrint = stringToPrint + `( ${tmp.value} ) -> `;
-    while (tmp.nextNode !== null) {
-      tmp = tmp.nextNode;
+    if (this.head !== null) {
+      let tmp = this.head;
       stringToPrint = stringToPrint + `( ${tmp.value} ) -> `;
-      if (tmp.nextNode === null) {
-        stringToPrint = stringToPrint + `null`;
+      while (tmp.nextNode !== null) {
+        tmp = tmp.nextNode;
+        stringToPrint = stringToPrint + `( ${tmp.value} ) -> `;
+        if (tmp.nextNode === null) {
+          stringToPrint = stringToPrint + `null`;
+        }
       }
+      console.log(stringToPrint);
+    } else {
+      console.log("( null )");
     }
-    console.log(stringToPrint);
   }
   insertAt(index, ...values) {
     if (index < 0 || index >= this.size()) {
@@ -188,15 +232,19 @@ class LinkedList {
     if (index < 0 || index >= this.size()) {
       throw RangeError;
     }
-    const removeFrom = this.at(index - 1);
+    const removeFrom = this.at(index);
     let tmp = this.head;
-    if (tmp.value === removeFrom) {
-      tmp.nextNode = tmp.nextNode.nextNode;
+    let prev = null;
+    if (tmp.value[0] === removeFrom[0]) {
+      this.head = tmp.nextNode !== null ? tmp.nextNode : null;
+      return;
     }
     while (tmp.nextNode !== null) {
+      prev = tmp;
       tmp = tmp.nextNode;
-      if (tmp.value === removeFrom) {
-        tmp.nextNode = tmp.nextNode.nextNode;
+      if (tmp.value[0] === removeFrom[0]) {
+        prev.nextNode = tmp.nextNode;
+        return;
       }
     }
   }

@@ -62,5 +62,23 @@ class HashMap {
       }
     }
   }
+  remove(key) {
+    const hashed_key = this.hash(key);
+    const index = hashed_key % this.capacity;
+    this.#buckets[index].toString();
+    if (this.#buckets[index] === null) {
+      return false;
+    } else {
+      const exists = this.#buckets[index].contains(key);
+      if (exists) {
+        const i = this.#buckets[index].findIndexHash(key);
+        this.#buckets[index].removeAt(i);
+        this.#buckets[index].toString();
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }
 export { HashMap };
