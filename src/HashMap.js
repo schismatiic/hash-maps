@@ -48,5 +48,19 @@ class HashMap {
       }
     }
   }
+  has(key) {
+    const hashed_key = this.hash(key);
+    const index = hashed_key % this.capacity;
+    if (this.#buckets[index] === null) {
+      return false;
+    } else {
+      const exists = this.#buckets[index].contains(key);
+      if (exists) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }
 export { HashMap };

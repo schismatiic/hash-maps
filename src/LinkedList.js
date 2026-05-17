@@ -147,7 +147,6 @@ class LinkedList {
           return tmp.value[1];
         }
       }
-      return -1;
     }
   }
   toString() {
