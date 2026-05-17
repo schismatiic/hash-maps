@@ -12,12 +12,12 @@ class HashMap {
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
+      hashCode = hashCode % this.capacity;
     }
     return hashCode;
   }
   set(key, value) {
-    const hashed_key = this.hash(key);
-    const index = hashed_key % this.capacity;
+    const index = this.hash(key);
     if (index < 0 || index >= this.#buckets.length) {
       throw new Error("Trying to access index out of bounds");
     }
@@ -35,8 +35,7 @@ class HashMap {
     }
   }
   get(key) {
-    const hashed_key = this.hash(key);
-    const index = hashed_key % this.capacity;
+    const index = this.hash(key);
     if (this.#buckets[index] === null) {
       return null;
     } else {
@@ -49,8 +48,7 @@ class HashMap {
     }
   }
   has(key) {
-    const hashed_key = this.hash(key);
-    const index = hashed_key % this.capacity;
+    const index = this.hash(key);
     if (this.#buckets[index] === null) {
       return false;
     } else {
@@ -63,8 +61,7 @@ class HashMap {
     }
   }
   remove(key) {
-    const hashed_key = this.hash(key);
-    const index = hashed_key % this.capacity;
+    const index = this.hash(key);
     this.#buckets[index].toString();
     if (this.#buckets[index] === null) {
       return false;
