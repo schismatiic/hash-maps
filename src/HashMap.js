@@ -94,5 +94,17 @@ class HashMap {
     this.#buckets.fill(null);
     return this.#buckets;
   }
+  keys() {
+    let arrayKeys = [];
+    for (let index = 0; index < this.#buckets.length; index++) {
+      if (this.#buckets[index] !== null) {
+        const bucket = this.#buckets[index].bucketKeys();
+        bucket.forEach((element) => {
+          arrayKeys.push(element);
+        });
+      }
+    }
+    return arrayKeys;
+  }
 }
 export { HashMap };

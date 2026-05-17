@@ -65,6 +65,16 @@ class LinkedList {
       }
     }
   }
+  bucketKeys() {
+    let bucketArray = [];
+    let tmp = this.head;
+    bucketArray.push(tmp.value[0]);
+    while (tmp.nextNode !== null) {
+      tmp = tmp.nextNode;
+      bucketArray.push(tmp.value[0]);
+    }
+    return bucketArray;
+  }
   pop() {
     if (this.head === null) {
       return undefined;
