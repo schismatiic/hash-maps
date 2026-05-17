@@ -25,15 +25,26 @@ class HashMap {
       const list = new LinkedList();
       list.append([key, value]);
       this.#buckets[index] = list;
-      this.#buckets[index].toString();
     } else {
       const exists = this.#buckets[index].contains(key);
       if (exists) {
         this.#buckets[index].replace(key, value);
-        this.#buckets[index].toString();
       } else {
-        this.#buckets[index].toString();
         this.#buckets[index].append([key, value]);
+      }
+    }
+  }
+  get(key) {
+    const hashed_key = this.hash(key);
+    const index = hashed_key % this.capacity;
+    if (this.#buckets[index] === null) {
+      return null;
+    } else {
+      const exists = this.#buckets[index].contains(key);
+      if (exists) {
+        return this.#buckets[index].findKey(key);
+      } else {
+        return null;
       }
     }
   }

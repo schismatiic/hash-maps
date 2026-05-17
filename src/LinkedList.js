@@ -131,6 +131,25 @@ class LinkedList {
       return -1;
     }
   }
+  findKey(key) {
+    if (this.head === null) {
+      return undefined;
+    } else {
+      let count = 0;
+      let tmp = this.head;
+      if (key === tmp.value[0]) {
+        return tmp.value[1];
+      }
+      while (tmp.nextNode !== null) {
+        tmp = tmp.nextNode;
+        count++;
+        if (tmp.value[0] === key) {
+          return tmp.value[1];
+        }
+      }
+      return -1;
+    }
+  }
   toString() {
     let stringToPrint = "";
     let tmp = this.head;

@@ -14,3 +14,4 @@ hash_map.set("abc", "third");
 hash_map.set("cab", "fourth");
 
 hash_map.set("ba", "UPDATED");
+console.log(hash_map.get("cab"));
