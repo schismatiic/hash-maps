@@ -90,5 +90,9 @@ class HashMap {
     });
     return count;
   }
+  clear() {
+    this.#buckets.fill(null);
+    return this.#buckets;
+  }
 }
 export { HashMap };
